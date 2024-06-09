@@ -29,4 +29,11 @@ app.MapGet("/qrcode", (string text) => {
     };
 });
 
+app.MapPost("/gcodes", (List<List<bool>> table) => {
+    return new {
+        height = table.Count,
+        width = table[0].Count
+    };
+});
+
 app.Run();

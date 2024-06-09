@@ -1,7 +1,20 @@
 const transformTextBox = document.querySelector('#totransform');
 const cvs = document.querySelector('canvas');
+const textarea = document.querySelector('textarea');
 
 console.log(cvs);
+
+const calculateGCodes = async (table) => {
+    const gCodeResponse = await fetch('/gcodes', {
+        method: 'POST',
+        body: JSON.stringify(table),
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    });
+    const gCodeObject = await gCodeResponse.json();
+    console.log(gCodeObject);
+};
 
 const paintQrCodeTable = (table) => {
     let ctx = cvs.getContext('2d');
@@ -21,6 +34,7 @@ const getQrCode = async (url) => {
     const responseText = await fetch('/qrcode?text=' + encodeURIComponent(url));
     const responseObject = await responseText.json();
     paintQrCodeTable(responseObject.table);
+    calculateGCodes(responseObject.table);
 };
 
 transformTextBox.addEventListener('change', ev => {

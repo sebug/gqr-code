@@ -7,4 +7,10 @@ app.UseDefaultFiles();
 
 app.UseStaticFiles();
 
+app.MapGet("/qrcode", (string text) => {
+    return new {
+        text
+    };
+});
+
 app.Run();

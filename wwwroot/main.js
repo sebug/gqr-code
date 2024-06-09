@@ -2,6 +2,8 @@ const transformTextBox = document.querySelector('#totransform');
 const cvs = document.querySelector('canvas');
 const textarea = document.querySelector('textarea');
 
+const size = 100;
+
 console.log(cvs);
 
 const calculateGCodes = async (table) => {
@@ -13,12 +15,12 @@ const calculateGCodes = async (table) => {
         }
     });
     const gCodeObject = await gCodeResponse.json();
-    console.log(gCodeObject);
+    textarea.value = gCodeObject.program;
 };
 
 const paintQrCodeTable = (table) => {
     let ctx = cvs.getContext('2d');
-    ctx.clearRect(0, 0, 500, 500);
+    ctx.clearRect(0, 0, size, size);
     for (let y = 0; y < table.length; y += 1) {
         let row = table[y];
         for (let x = 0; x < row.length; x += 1) {

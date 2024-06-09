@@ -10,10 +10,12 @@ app.UseDefaultFiles();
 
 app.UseStaticFiles();
 
+var size = 100;
+
 app.MapGet("/qrcode", (string text) => {
     var writer = new QRCodeWriter();
-    var matrix = writer.encode(text, BarcodeFormat.QR_CODE, 500,
-             500, null);
+    var matrix = writer.encode(text, BarcodeFormat.QR_CODE, size,
+             size, null);
     List<List<bool>> table = new List<List<bool>>();
     for (int y = 0; y < matrix.Height; y += 1)
     {
@@ -32,7 +34,8 @@ app.MapGet("/qrcode", (string text) => {
 app.MapPost("/gcodes", (List<List<bool>> table) => {
     return new {
         height = table.Count,
-        width = table[0].Count
+        width = table[0].Count,
+        program = new GCodeCalculator(table).GCodes()
     };
 });
 

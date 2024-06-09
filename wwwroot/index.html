@@ -3,6 +3,12 @@
     <head>
         <meta charset="utf-8" />
         <title>qQR-Code</title>
+        <style>
+            textarea {
+                width: 100%;
+                height: 50%;
+            }
+        </style>
     </head>
     <body>
         <h1>GQR-Code</h1>
@@ -10,7 +16,7 @@
             generate the g-code commands to paint it.
         </p>
         <p>Text to QRcode: <input type="text" name="totransform" id="totransform" /></p>
-        <canvas width="500" height="500"></canvas>
+        <canvas width="100" height="100"></canvas>
         <p>And the following G-Codes:</p>
         <textarea></textarea>
         <script type="module" src="main.js"></script>
